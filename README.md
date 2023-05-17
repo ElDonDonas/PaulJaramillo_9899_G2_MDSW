@@ -1,6 +1,6 @@
-# 4618_G6_MDSW
-Grupo 6 de Metodología Desarollo de Software
+# 9899
+Grupo 2 de Metodología Desarollo de Software
 Integrantes
-Morales Stalin
-Murillo Alex 
-Soria Giovanna
+Gabriel del Salto
+Paul Jaramillo
+Kevin Lechón
