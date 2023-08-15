@@ -1,1 +1,129 @@
+import nltk
+from nltk.chat.util import Chat, reflections
+
+# Pares de patrones y respuestas para el chatbot
+pairs = [
+    # Saludos
+    [
+        r"Hola|Cómo estás|Buenos días",
+        ["¡Hola!", "Hola, ¿en qué puedo ayudarte?"]
+    ],
+    [
+        r"¿Cómo estás?|¿Cómo te va?",
+        ["Estoy aquí y listo para ayudarte.", "¡Me siento genial! ¿En qué puedo ayudarte?"]
+    ],
+
+    # Información personal
+    [
+        r"¿Cómo te llamas?|¿Cuál es tu nombre?",
+        ["Me llamo ChatBot y estoy aquí para ayudarte.",]
+    ],
+
+    # Preguntas generales
+    [
+        r"¿Qué puedes hacer?|¿Funciones?|¿Para qué sirves?",
+        ["Soy un chatbot básico y puedo responder preguntas simples.",]
+    ],
+    [
+        r"¿Cuál es el sentido de la vida?|¿Cuál es el significado de todo?",
+        ["Esa es una pregunta profunda. Algunos creen que es 42, pero la respuesta puede variar.",]
+    ],
+
+    # Preguntas sobre comida
+    [
+        r"¿Qué puedes decirme sobre comida?|Háblame de comida|Dime sobre platillos",
+        ["¡Me encanta hablar de comida! ¿Tienes alguna preferencia en particular?"]
+    ],
+    [
+        r"(.*) (comida|almuerzo|cena|desayuno)",
+        ["La comida es maravillosa. ¿Te gusta algún tipo de cocina en particular?"]
+    ],
+
+    # Despedidas
+    [
+        r"Adiós|Chao|Hasta luego",
+        ["¡Hasta luego!", "¡Que tengas un buen día!"]
+    ],
+  # Respuestas adicionales sobre comida basadas en palabras clave
+    [
+    r"(.*) (comida|cocina|cocinar)",
+        ["La comida es un tema que me apasiona. ¿Tienes alguna pregunta específica sobre recetas o tipos de cocina?"]
+    ],
+    [
+    r"(.*) (bebida|bebidas)",
+       ["Las bebidas son una parte importante de la experiencia culinaria. ¿Prefieres bebidas frías o calientes?"]
+    ],
+    [
+    r"(.*) (postre|dulces)",
+        ["Los postres son deliciosos. ¿Tienes algún postre favorito que te gustaría compartir?"]
+    ],
+    [
+    r"(.*) (carnes|vegetales|ingredientes)",
+        ["Los ingredientes son fundamentales en la preparación de platos. ¿Te gustaría saber sobre ingredientes específicos?"]
+    ],
+    [
+    r"(.*) (sabor|gusto|paladar)",
+        ["Los sabores juegan un papel crucial en cómo percibimos la comida. ¿Cuál es tu sabor favorito?"]
+    ],
+    [
+    r"(.*) (comida rápida|fast food|comida chatarra)",
+       ["La comida rápida es conveniente, pero es importante consumirla con moderación para mantener una dieta equilibrada."]
+    ],
+    [
+    r"(.*) (cocina internacional|comida del mundo)",
+        ["La comida internacional ofrece una amplia variedad de sabores y culturas. ¿Te interesa algún tipo de cocina en particular?"]
+    ],
+    [
+    r"(.*) (recetas|cocina casera)",
+        ["Cocinar en casa puede ser muy gratificante. ¿Te gustaría que te comparta alguna receta en específico?"]
+    ],
+      # Respuestas adicionales sobre recetas y cocina casera
+    [
+    r"(.*) (recetas|cocina casera)",
+        ["Cocinar en casa es una excelente forma de experimentar con sabores. ¿Te gustaría una receta para un plato en particular?"]
+    ],
+    [
+    r"¿Tienes una receta para (.+)?|Dime una receta de (.+)",
+        ["¡Claro! ¿Te gustaría una receta de {0}?"]
+    ],
+    [
+    r"Sí, dame una receta de (.+)",
+        ["¡Genial! Aquí tienes una receta de {0}: ... (describe la receta) ... ¿Te gustaría saber más sobre esta receta?"]
+    ],
+
+# Respuestas sobre restaurantes
+    [
+    r"(.*) (restaurantes|lugares para comer)",
+        ["Explorar restaurantes es una forma emocionante de disfrutar de la comida. ¿Tienes alguna preferencia en cuanto al tipo de restaurante?"]
+    ],
+    [
+    r"¿Conoces algún buen restaurante (.+)?",
+        ["¡Por supuesto! Hay varios buenos restaurantes {0}. ¿Buscas algo en particular?"]
+    ],
+    [
+    r"Recomiéndame un restaurante",
+        ["Te recomiendo probar {0}. Es un restaurante popular en esa área. ¿Te gustaría saber más detalles?"]
+    ],
+    [
+    r"He oído hablar de un nuevo restaurante (.+) ¿Qué opinas?",
+        ["¡Es emocionante escuchar sobre nuevos restaurantes! Me gustaría saber más para darte una opinión. ¿Tienes más información sobre este restaurante?"]
+    ],
+    [
+    r"(.*)",
+       ["La comida y los restaurantes son temas interesantes. ¿Tienes alguna otra pregunta o curiosidad sobre ellos?", "¡La comida y los restaurantes ofrecen tantas posibilidades! ¿En qué más puedo ayudarte?"]
+  ]
+]
+  
+# Crear el chatbot
+chatbot = Chat(pairs, reflections)
+
+# Loop de conversación
+print("¡Hola! Soy un chatbot. Puedes escribir 'salir' en cualquier momento para finalizar.")
+while True:
+    user_input = input("Tú: ")
+    if user_input.lower() == 'salir':
+        print("Chatbot: ¡Hasta luego!")
+        break
+    response = chatbot.respond(user_input)
+    print("Chatbot:", response)
 
